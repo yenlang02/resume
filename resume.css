@@ -1,0 +1,189 @@
+/* =========================
+   Base / Mobile-first styles
+   (works well at 412px)
+   ========================= */
+
+   * { box-sizing: border-box; }
+
+   body {
+     margin: 0;
+     padding: 16px;
+     font-family: Arial, Helvetica, sans-serif;
+     line-height: 1.5;
+     color: #111;
+     background: #f6f7fb;
+   }
+   
+   /* Make the page feel like a "card" */
+   body > * {
+     max-width: 900px;
+     margin-left: auto;
+     margin-right: auto;
+   }
+   
+   /* Headings */
+   h1 {
+     margin: 0 0 8px 0;
+     font-size: 2rem;
+     letter-spacing: 0.3px;
+   }
+   
+   h2 {
+     margin: 18px 0 8px 0;
+     font-size: 1.15rem;
+     text-transform: uppercase;
+     letter-spacing: 1px;
+     border-bottom: 2px solid #e3e6f2;
+     padding-bottom: 6px;
+   }
+   
+   h3 {
+     margin: 14px 0 4px 0;
+     font-size: 1.05rem;
+   }
+   
+   /* Paragraph + lists */
+   p { margin: 0 0 10px 0; }
+   
+   ul {
+     margin: 6px 0 0 18px;
+     padding: 0;
+   }
+   
+   li { margin: 6px 0; }
+   
+   /* Links */
+   a {
+     color: #1e57d8;
+     text-decoration: none;
+     font-weight: 600;
+   }
+   a:hover { text-decoration: underline; }
+   
+   /* Sections look like cards */
+   section {
+     background: #ffffff;
+     border: 1px solid #e3e6f2;
+     border-radius: 12px;
+     padding: 14px 14px;
+     margin: 14px 0;
+   }
+   
+   /* Articles inside sections */
+   article + article {
+     margin-top: 14px;
+     padding-top: 12px;
+     border-top: 1px dashed #e3e6f2;
+   }
+   
+   /* Make images nicer on project pages */
+   img {
+     display: block;
+     max-width: 100%;
+     height: auto;
+     border-radius: 12px;
+     border: 1px solid #e3e6f2;
+     margin: 10px 0 0 0;
+   }
+   
+   /* =========================
+      Desktop styles (1920px)
+      Different layout using ONLY CSS
+      ========================= */
+   
+   @media (min-width: 1000px) {
+   
+     body {
+       padding: 30px;
+     }
+   
+     /* Put the page on a "paper" */
+     body::before {
+       content: "";
+       position: fixed;
+       inset: 0;
+       background: radial-gradient(900px 500px at 20% 10%, rgba(30,87,216,0.12), transparent 60%),
+                   radial-gradient(800px 400px at 80% 0%, rgba(160,90,255,0.10), transparent 55%);
+       pointer-events: none;
+     }
+   
+     body > * {
+       max-width: 1100px;
+     }
+   
+     /* Layout trick WITHOUT changing HTML:
+        We turn BODY into a grid and place certain sections.
+        Order in your HTML:
+          h1, p(contact), section(obj), section(edu), section(projects), section(skills)
+   
+        On desktop:
+          left column: objective, education, projects
+          right column: contact + skills (as a sidebar)
+     */
+     body {
+       display: grid;
+       grid-template-columns: 1fr 340px;
+       gap: 16px;
+       align-items: start;
+     }
+   
+     /* Header spans full width */
+     h1 {
+       grid-column: 1 / -1;
+       font-size: 2.4rem;
+       margin-bottom: 0;
+     }
+   
+     /* Your contact line (the <p> right under h1) goes in the sidebar */
+     h1 + p {
+       grid-column: 2;
+       margin-top: 0;
+       background: #ffffff;
+       border: 1px solid #e3e6f2;
+       border-radius: 12px;
+       padding: 12px;
+       position: sticky;
+       top: 16px;
+     }
+   
+     /* Make the email/link line look cleaner */
+     h1 + p a {
+       display: inline-block;
+       margin-left: 10px;
+     }
+   
+     /* Objective section stays left */
+     body > section:nth-of-type(1) {
+       grid-column: 1;
+     }
+   
+     /* Education section stays left */
+     body > section:nth-of-type(2) {
+       grid-column: 1;
+     }
+   
+     /* Projects section stays left */
+     body > section:nth-of-type(3) {
+       grid-column: 1;
+     }
+   
+     /* Skills section becomes the sidebar card under contact */
+     body > section:nth-of-type(4) {
+       grid-column: 2;
+       position: sticky;
+       top: 110px; /* below the contact card */
+     }
+   
+     /* Slightly tighter cards on desktop */
+     section { padding: 16px; }
+   }
+   
+   /* =========================
+      Small polish for very tiny screens
+      ========================= */
+   
+   @media (max-width: 380px) {
+     body { padding: 12px; }
+     h1 { font-size: 1.7rem; }
+   }
+   
